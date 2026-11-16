@@ -2,10 +2,12 @@ package org.teamforge.util;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
@@ -13,7 +15,7 @@ import org.teamforge.model.Task;
 import org.teamforge.model.TaskStatus;
 
 /**
- * Method static untuk membuat badge status dan format tanggal.
+ * Method static untuk membuat avatar, badge status, dan format tanggal.
  * Warna badge diatur di teamforge.css lewat nama styleClass.
  */
 public class StyleHelper {
@@ -22,6 +24,34 @@ public class StyleHelper {
     };
 
     private StyleHelper() {
+    }
+
+    // Avatar: lingkaran berisi inisial nama, warnanya tetap untuk nama yang sama
+    public static Label avatar(String name) {
+        String[] words = name.trim().split(" ");
+        String initials = words[0].substring(0, 1);
+        if (words.length > 1) {
+            initials = initials + words[1].substring(0, 1);
+        }
+        int total = 0;
+        for (char c : name.toCharArray()) {
+            total = total + c;
+        }
+        Label label = new Label(initials.toUpperCase());
+        label.getStyleClass().add("avatar");
+        label.getStyleClass().add("avatar-" + (total % 6));
+        label.setTooltip(new Tooltip(name));
+        return label;
+    }
+
+    // Beberapa avatar berjajar, misalnya untuk penerima tugas atau anggota project
+    public static HBox avatarGroup(List<String> names) {
+        HBox box = new HBox(2);
+        box.setAlignment(Pos.CENTER_LEFT);
+        for (String name : names) {
+            box.getChildren().add(avatar(name));
+        }
+        return box;
     }
 
     // Badge dengan latar berwarna, contoh variant: "brand", "neutral", "overdue", "blocked"
