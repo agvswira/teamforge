@@ -1,0 +1,12 @@
+# Hasil build Maven
+target/
+
+# Pengaturan koneksi lokal (berisi password MySQL masing-masing)
+db.properties
+
+# IDE dan sistem operasi
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
