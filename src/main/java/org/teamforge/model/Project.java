@@ -57,6 +57,21 @@ public class Project extends BaseEntity {
         tasks.remove(task);
     }
 
+    // Persentase tugas DONE dari seluruh tugas, 0 jika belum ada tugas
+    public double getProgress() {
+        if (tasks.isEmpty()) {
+            return 0;
+        }
+        long selesai = tasks.stream()
+                .filter(t -> t.getStatus() == TaskStatus.DONE)
+                .count();
+        return (double) selesai / tasks.size() * 100;
+    }
+
+    public boolean isOverdue() {
+        return deadline != null && deadline.isBefore(LocalDate.now()) && getProgress() < 100;
+    }
+
     @Override
     public String getDisplayName() {
         return name;
