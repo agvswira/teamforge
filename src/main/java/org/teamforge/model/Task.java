@@ -3,6 +3,9 @@ package org.teamforge.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import org.teamforge.exception.ValidationException;
 
 public class Task extends BaseEntity {
     public static final int PRIORITY_LOW = 1;
@@ -35,6 +38,66 @@ public class Task extends BaseEntity {
         this.priority = priority;
         this.dueAt = dueAt;
         this.notes = notes;
+    }
+
+    // Status TODO menjadi IN_PROGRESS
+    public void start() throws ValidationException {
+        if (status != TaskStatus.TODO) {
+            throw new ValidationException("Hanya tugas berstatus TODO yang dapat dimulai.");
+        }
+        status = TaskStatus.IN_PROGRESS;
+    }
+
+    // Status IN_PROGRESS menjadi DONE
+    public void complete() throws ValidationException {
+        if (status != TaskStatus.IN_PROGRESS) {
+            throw new ValidationException("Hanya tugas berstatus IN_PROGRESS yang dapat diselesaikan.");
+        }
+        status = TaskStatus.DONE;
+    }
+
+    // Status DONE kembali menjadi TODO
+    public void reopen() throws ValidationException {
+        if (status != TaskStatus.DONE) {
+            throw new ValidationException("Hanya tugas berstatus DONE yang dapat dibuka kembali.");
+        }
+        status = TaskStatus.TODO;
+    }
+
+    public boolean isLate() {
+        return isLate(LocalDate.now());
+    }
+
+    // Overloading: tanggal pembanding dapat ditentukan sendiri
+    public boolean isLate(LocalDate today) {
+        return dueAt != null && status != TaskStatus.DONE && dueAt.isBefore(today);
+    }
+
+    public boolean isBlocked() {
+        return status == TaskStatus.TODO && prerequisites.stream()
+                .anyMatch(p -> p.getStatus() != TaskStatus.DONE);
+    }
+
+    public boolean isAssignedTo(int userId) {
+        return assignments.stream().anyMatch(a -> a.getUserId() == userId);
+    }
+
+    public String getPriorityLabel() {
+        return switch (priority) {
+            case PRIORITY_LOW -> "Rendah";
+            case PRIORITY_HIGH -> "Tinggi";
+            default -> "Sedang";
+        };
+    }
+
+    public String getAssigneeNames() {
+        if (assignments.isEmpty()) {
+            return "-";
+        }
+        List<String> names = assignments.stream()
+                .map(a -> a.getUserName())
+                .collect(Collectors.toList());
+        return String.join(", ", names);
     }
 
     public int getProjectId() {
