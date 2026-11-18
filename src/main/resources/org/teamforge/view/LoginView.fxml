@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox prefHeight="760.0" prefWidth="1180.0" spacing="8.0" styleClass="app-root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.teamforge.controller.LoginController">
+    <children>
+        <VBox alignment="CENTER" spacing="12.0" styleClass="auth-hero" HBox.hgrow="ALWAYS">
+            <children>
+                <Label styleClass="logo" text="TF" />
+                <Label styleClass="page-title" text="TeamForge" />
+                <Label styleClass="muted" text="Kelola tugas kelompok dan pantau progresnya." />
+            </children>
+        </VBox>
+        <StackPane minWidth="420.0" styleClass="auth-form" HBox.hgrow="ALWAYS">
+            <children>
+                <VBox fx:id="formMasuk" alignment="CENTER_LEFT" maxWidth="300.0" spacing="6.0">
+                    <children>
+                        <Label styleClass="h2" text="Masuk ke TeamForge" />
+                        <Label styleClass="field-label" text="Email">
+                            <VBox.margin>
+                                <Insets top="12.0" />
+                            </VBox.margin>
+                        </Label>
+                        <TextField fx:id="txtEmail" promptText="nama@email.com" />
+                        <Label styleClass="field-label" text="Password" />
+                        <PasswordField fx:id="txtPassword" onAction="#handleMasuk" />
+                        <Label fx:id="lblPesanMasuk" managed="false" styleClass="error-text" visible="false" wrapText="true" />
+                        <Button defaultButton="true" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleMasuk" text="Masuk">
+                            <VBox.margin>
+                                <Insets top="8.0" />
+                            </VBox.margin>
+                        </Button>
+                        <HBox alignment="CENTER" spacing="4.0">
+                            <children>
+                                <Label styleClass="muted" text="Belum punya akun?" />
+                                <Hyperlink onAction="#handleKeDaftar" text="Daftar" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <VBox fx:id="formDaftar" alignment="CENTER_LEFT" managed="false" maxWidth="300.0" spacing="6.0" visible="false">
+                    <children>
+                        <Label styleClass="h2" text="Buat akun" />
+                        <Label styleClass="field-label" text="Nama">
+                            <VBox.margin>
+                                <Insets top="12.0" />
+                            </VBox.margin>
+                        </Label>
+                        <TextField fx:id="txtNama" />
+                        <Label styleClass="field-label" text="Email" />
+                        <TextField fx:id="txtEmailBaru" promptText="nama@email.com" />
+                        <Label styleClass="field-label" text="Password (minimal 6 karakter)" />
+                        <PasswordField fx:id="txtPasswordBaru" />
+                        <Label styleClass="field-label" text="Ulangi password" />
+                        <PasswordField fx:id="txtUlangiPassword" onAction="#handleDaftar" />
+                        <Label fx:id="lblPesanDaftar" managed="false" styleClass="error-text" visible="false" wrapText="true" />
+                        <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#handleDaftar" styleClass="primary" text="Buat akun">
+                            <VBox.margin>
+                                <Insets top="8.0" />
+                            </VBox.margin>
+                        </Button>
+                        <HBox alignment="CENTER" spacing="4.0">
+                            <children>
+                                <Label styleClass="muted" text="Sudah punya akun?" />
+                                <Hyperlink onAction="#handleKeMasuk" text="Masuk" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </StackPane>
+    </children>
+    <padding>
+        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+    </padding>
+</HBox>
