@@ -6,16 +6,10 @@ package org.teamforge.model;
 public class TaskAssignment {
     private final int taskId;
     private final User user;
-    private String responsibility;
 
-    public TaskAssignment(int taskId, User user, String responsibility) {
+    public TaskAssignment(int taskId, User user) {
         this.taskId = taskId;
         this.user = user;
-        this.responsibility = responsibility;
-    }
-
-    public void changeResponsibility(String responsibility) {
-        this.responsibility = responsibility;
     }
 
     public int getTaskId() {
@@ -32,9 +26,5 @@ public class TaskAssignment {
 
     public User getUser() {
         return user;
-    }
-
-    public String getResponsibility() {
-        return responsibility;
     }
 }
