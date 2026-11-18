@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToWidth="true" prefHeight="700.0" prefWidth="940.0" styleClass="page-scroll" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.teamforge.controller.DashboardController">
+    <content>
+        <VBox spacing="16.0" styleClass="page">
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="8.0">
+                    <children>
+                        <VBox HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label fx:id="lblJudul" styleClass="page-title" text="-" />
+                                <Label fx:id="lblSubjudul" styleClass="muted" text="-" wrapText="true" />
+                            </children>
+                        </VBox>
+                        <Button fx:id="btnUbahProject" mnemonicParsing="false" onAction="#handleUbahProject" text="Ubah project" />
+                        <Button fx:id="btnTugasBaru" mnemonicParsing="false" onAction="#handleTugasBaru" styleClass="primary" text="+ Tugas baru" />
+                    </children>
+                </HBox>
+                <GridPane hgap="12.0">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="25.0" />
+                        <ColumnConstraints percentWidth="25.0" />
+                        <ColumnConstraints percentWidth="25.0" />
+                        <ColumnConstraints percentWidth="25.0" />
+                    </columnConstraints>
+                    <children>
+                        <VBox spacing="4.0" styleClass="card" GridPane.columnIndex="0">
+                            <children>
+                                <Label styleClass="muted" text="Progres project" />
+                                <Label fx:id="lblProgres" styleClass="stat-value" text="0%" />
+                                <ProgressBar fx:id="pbProgres" maxWidth="Infinity" progress="0.0" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="4.0" styleClass="card" GridPane.columnIndex="1">
+                            <children>
+                                <Label styleClass="muted" text="Sedang dikerjakan" />
+                                <Label fx:id="lblInProgress" styleClass="stat-value" text="0" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="4.0" styleClass="card" GridPane.columnIndex="2">
+                            <children>
+                                <Label styleClass="muted" text="Terlambat" />
+                                <Label fx:id="lblTerlambat" styleClass="stat-value, text-overdue" text="0" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="4.0" styleClass="card" GridPane.columnIndex="3">
+                            <children>
+                                <Label styleClass="muted" text="Terhambat prasyarat" />
+                                <Label fx:id="lblTerhambat" styleClass="stat-value, text-blocked" text="0" />
+                            </children>
+                        </VBox>
+                    </children>
+                </GridPane>
+                <HBox spacing="12.0">
+                    <children>
+                        <VBox styleClass="card, card-flush" HBox.hgrow="ALWAYS">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" styleClass="card-header">
+                                    <children>
+                                        <Label styleClass="h3" text="Perlu perhatian" />
+                                        <Region HBox.hgrow="ALWAYS" />
+                                        <Hyperlink onAction="#handleLihatTugas" text="Lihat semua tugas" />
+                                    </children>
+                                </HBox>
+                                <VBox fx:id="listPerhatian" />
+                            </children>
+                        </VBox>
+                        <VBox minWidth="230.0" spacing="12.0" styleClass="card">
+                            <children>
+                                <Label styleClass="h3" text="Anggota" />
+                                <VBox fx:id="listAnggota" spacing="12.0" />
+                                <Hyperlink fx:id="linkKelolaAnggota" onAction="#handleKelolaAnggota" text="Kelola anggota" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>

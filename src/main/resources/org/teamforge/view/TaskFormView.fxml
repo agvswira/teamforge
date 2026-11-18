@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefWidth="560.0" spacing="6.0" styleClass="dialog" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.teamforge.controller.TaskFormController">
+    <children>
+        <Label fx:id="lblJudul" styleClass="h2" text="Tugas baru" />
+        <Label styleClass="field-label" text="Judul tugas" />
+        <TextField fx:id="txtJudul" />
+        <Label styleClass="field-label" text="Deskripsi" />
+        <TextArea fx:id="txtDeskripsi" prefRowCount="3" wrapText="true" />
+        <GridPane hgap="12.0" vgap="6.0">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50.0" />
+                <ColumnConstraints percentWidth="50.0" />
+            </columnConstraints>
+            <children>
+                <Label styleClass="field-label" text="Prioritas" />
+                <Label styleClass="field-label" text="Tenggat" GridPane.columnIndex="1" />
+                <ComboBox fx:id="cmbPrioritas" maxWidth="Infinity" GridPane.rowIndex="1" />
+                <DatePicker fx:id="dpTenggat" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            </children>
+        </GridPane>
+        <Label styleClass="field-label" text="Penerima tugas" />
+        <VBox fx:id="listPenerima" spacing="8.0" styleClass="check-list" />
+        <Label styleClass="field-label" text="Prasyarat" />
+        <VBox fx:id="listPrasyarat" spacing="6.0" />
+        <ComboBox fx:id="cmbTambahPrasyarat" maxWidth="Infinity" onAction="#handleTambahPrasyarat" promptText="Tambah prasyarat" />
+        <Label fx:id="lblPesan" managed="false" styleClass="error-text" visible="false" wrapText="true" />
+        <HBox spacing="8.0" styleClass="dialog-footer">
+            <children>
+                <Button fx:id="btnHapus" mnemonicParsing="false" onAction="#handleHapus" styleClass="danger" text="Hapus tugas" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button cancelButton="true" mnemonicParsing="false" onAction="#handleBatal" text="Batal" />
+                <Button fx:id="btnSimpan" defaultButton="true" mnemonicParsing="false" onAction="#handleSimpan" text="Simpan" />
+            </children>
+        </HBox>
+    </children>
+</VBox>
