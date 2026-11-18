@@ -40,7 +40,7 @@ public class Task extends BaseEntity {
         this.notes = notes;
     }
 
-    // Status TODO menjadi IN_PROGRESS
+    // TODO -> IN_PROGRESS
     public void start() throws ValidationException {
         if (status != TaskStatus.TODO) {
             throw new ValidationException("Hanya tugas berstatus TODO yang dapat dimulai.");
@@ -48,7 +48,7 @@ public class Task extends BaseEntity {
         status = TaskStatus.IN_PROGRESS;
     }
 
-    // Status IN_PROGRESS menjadi DONE
+    // IN_PROGRESS -> DONE
     public void complete() throws ValidationException {
         if (status != TaskStatus.IN_PROGRESS) {
             throw new ValidationException("Hanya tugas berstatus IN_PROGRESS yang dapat diselesaikan.");
@@ -56,7 +56,7 @@ public class Task extends BaseEntity {
         status = TaskStatus.DONE;
     }
 
-    // Status DONE kembali menjadi TODO
+    // DONE -> TODO
     public void reopen() throws ValidationException {
         if (status != TaskStatus.DONE) {
             throw new ValidationException("Hanya tugas berstatus DONE yang dapat dibuka kembali.");
