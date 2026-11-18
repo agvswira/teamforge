@@ -1,12 +1,16 @@
 package org.teamforge.service;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Optional;
 
 import org.teamforge.dao.UserDAO;
 import org.teamforge.exception.ValidationException;
 import org.teamforge.model.User;
-import org.teamforge.util.PasswordUtil;
 import org.teamforge.util.Session;
 
 /**
@@ -33,7 +37,7 @@ public class AuthService {
         if (userDAO.findByEmail(cleanEmail).isPresent()) {
             throw new ValidationException("Email sudah terdaftar. Masuk atau pakai email lain.");
         }
-        User user = new User(name.trim(), cleanEmail, PasswordUtil.hash(password));
+        User user = new User(name.trim(), cleanEmail, hashPassword(password));
         userDAO.insert(user);
         return user;
     }
@@ -43,7 +47,7 @@ public class AuthService {
             throw new ValidationException("Email dan password wajib diisi.");
         }
         Optional<User> found = userDAO.findByEmail(email.trim().toLowerCase());
-        if (found.isEmpty() || !PasswordUtil.verify(password, found.get().getPasswordHash())) {
+        if (found.isEmpty() || !checkPassword(password, found.get().getPasswordHash())) {
             throw new ValidationException("Email atau password salah.");
         }
         User user = found.get();
@@ -58,6 +62,30 @@ public class AuthService {
         Session.clear();
     }
 
+    public void updateProfile(User user, String name, String email) throws SQLException, ValidationException {
+        if (name == null || name.isBlank()) {
+            throw new ValidationException("Nama wajib diisi.");
+        }
+        String cleanEmail = checkEmail(email);
+        Optional<User> other = userDAO.findByEmail(cleanEmail);
+        if (other.isPresent() && other.get().getId() != user.getId()) {
+            throw new ValidationException("Email sudah dipakai akun lain.");
+        }
+        user.setName(name.trim());
+        user.setEmail(cleanEmail);
+        userDAO.update(user);
+    }
+
+    // Foreign key menolak penghapusan jika akun masih tercatat di project atau tugas
+    public void deleteAccount(User user) throws SQLException, ValidationException {
+        try {
+            userDAO.delete(user.getId());
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new ValidationException("Akun masih tercatat di project atau tugas, jadi belum dapat dihapus.");
+        }
+        Session.clear();
+    }
+
     private String checkEmail(String email) throws ValidationException {
         if (email == null || email.isBlank()) {
             throw new ValidationException("Email wajib diisi.");
@@ -67,5 +95,39 @@ public class AuthService {
             throw new ValidationException("Format email tidak valid.");
         }
         return cleanEmail;
+    }
+
+    // ===================== hash password =====================
+
+    private String hashPassword(String password) {
+        byte[] saltBytes = new byte[8];
+        new SecureRandom().nextBytes(saltBytes);
+        String salt = toHex(saltBytes);
+        return salt + "$" + sha256(salt + password);
+    }
+
+    private boolean checkPassword(String password, String storedHash) {
+        String[] parts = storedHash.split("\\$");
+        if (parts.length != 2) {
+            return false;
+        }
+        return sha256(parts[0] + password).equals(parts[1]);
+    }
+
+    private String sha256(String text) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            return toHex(digest.digest(text.getBytes(StandardCharsets.UTF_8)));
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException("SHA-256 tidak tersedia", e);
+        }
+    }
+
+    private String toHex(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
     }
 }
