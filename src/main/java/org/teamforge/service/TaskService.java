@@ -238,11 +238,54 @@ public class TaskService {
         validateDependency(task, prerequisiteId);
     }
 
+    // Mengerjakan tugas (Coordinator / Member)
+
+    public void startTask(int taskId, int actorId) throws SQLException, ValidationException {
+        Task task = getTask(taskId);
+        checkAssignee(task, actorId);
+        List<Task> blockers = task.getPrerequisites().stream()
+                .filter(p -> p.getStatus() != TaskStatus.DONE)
+                .collect(Collectors.toList());
+        if (!blockers.isEmpty()) {
+            throw new DependencyException("Masih ada " + blockers.size()
+                    + " prasyarat yang belum DONE. Tugas baru bisa dimulai setelah semua prasyarat selesai.", blockers);
+        }
+        task.start();
+        taskDAO.updateStatus(task);
+    }
+
+    public void completeTask(int taskId, int actorId) throws SQLException, ValidationException {
+        Task task = getTask(taskId);
+        checkAssignee(task, actorId);
+        task.complete();
+        taskDAO.updateStatus(task);
+    }
+
+    public void reopenTask(int taskId, int actorId) throws SQLException, ValidationException {
+        Task task = getTask(taskId);
+        projectService.requireCoordinator(task.getProjectId(), actorId);
+        task.reopen();
+        taskDAO.updateStatus(task);
+    }
+
+    public void saveNotes(int taskId, int actorId, String notes) throws SQLException, ValidationException {
+        Task task = getTask(taskId);
+        checkAssignee(task, actorId);
+        taskDAO.updateNotes(taskId, notes);
+    }
+
     // Aturan bantu
 
     private void checkTitle(String title) throws ValidationException {
         if (title == null || title.isBlank()) {
             throw new ValidationException("Judul tugas wajib diisi.");
+        }
+    }
+
+    private void checkAssignee(Task task, int userId) throws SQLException, ValidationException {
+        projectService.requireMembership(task.getProjectId(), userId);
+        if (!task.isAssignedTo(userId)) {
+            throw new ValidationException("Tugas ini tidak ditugaskan kepada Anda.");
         }
     }
 

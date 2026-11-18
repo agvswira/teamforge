@@ -26,7 +26,7 @@ public class ProjectService {
     private final UserDAO userDAO = new UserDAO();
     private final TaskDAO taskDAO = new TaskDAO();
 
-    // Membaca data
+    // ===================== membaca data =====================
 
     public List<Project> getProjectsForUser(int userId) throws SQLException {
         return projectDAO.findByUser(userId);
@@ -40,7 +40,7 @@ public class ProjectService {
         return membershipDAO.findByProject(projectId);
     }
 
-    // Pemeriksaan hak akses
+    // ===================== pemeriksaan hak akses =====================
 
     public ProjectMembership requireMembership(int projectId, int userId) throws SQLException, ValidationException {
         Optional<ProjectMembership> found = membershipDAO.find(projectId, userId);
@@ -59,7 +59,7 @@ public class ProjectService {
         return membership;
     }
 
-    // CRUD project
+    // ===================== CRUD project =====================
 
     // Menyimpan project dan menjadikan pembuatnya COORDINATOR dalam satu transaksi
     public Project createProject(String name, String description, LocalDate deadline, User creator)
@@ -113,7 +113,7 @@ public class ProjectService {
         }
     }
 
-    // CRUD anggota (project_members)
+    // ===================== CRUD anggota (project_members) =====================
 
     public User addMember(int projectId, int actorId, String email, ProjectRole role)
             throws SQLException, ValidationException {
