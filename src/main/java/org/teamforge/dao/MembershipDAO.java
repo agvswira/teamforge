@@ -20,7 +20,6 @@ public class MembershipDAO {
     private static final String SELECT_WITH_USER = "SELECT pm.project_id, pm.role, u.*"
             + " FROM project_members pm JOIN users u ON u.id = pm.user_id";
 
-    // CREATE
     public void insert(int projectId, int userId, ProjectRole role) throws SQLException {
         String sql = "INSERT INTO project_members (project_id, user_id, role) VALUES (?, ?, ?)";
         Connection conn = DatabaseConnection.getConnection();
@@ -62,7 +61,6 @@ public class MembershipDAO {
         }
     }
 
-    // UPDATE
     public void updateRole(int projectId, int userId, ProjectRole role) throws SQLException {
         String sql = "UPDATE project_members SET role = ? WHERE project_id = ? AND user_id = ?";
         Connection conn = DatabaseConnection.getConnection();
@@ -74,7 +72,6 @@ public class MembershipDAO {
         }
     }
 
-    // DELETE
     public void delete(int projectId, int userId) throws SQLException {
         String sql = "DELETE FROM project_members WHERE project_id = ? AND user_id = ?";
         Connection conn = DatabaseConnection.getConnection();
