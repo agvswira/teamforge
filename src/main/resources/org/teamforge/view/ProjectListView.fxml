@@ -24,6 +24,7 @@
                                 <Label fx:id="lblEmail" styleClass="caption" text="-" />
                             </children>
                         </VBox>
+                        <Button mnemonicParsing="false" onAction="#handleAkun" text="Akun" />
                         <Button mnemonicParsing="false" onAction="#handleKeluar" text="Keluar" />
                     </children>
                 </HBox>
