@@ -109,6 +109,7 @@ public class MainController {
         }
     }
 
+    // Memuat file FXML halaman lalu menampilkannya di area konten
     public ProjectPageController showPage(String fxml) {
         try {
             FXMLLoader loader = new FXMLLoader(App.class.getResource("view/" + fxml + ".fxml"));

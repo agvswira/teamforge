@@ -139,6 +139,22 @@ public class ProjectListController {
     }
 
     @FXML
+    private void handleAkun(ActionEvent event) {
+        try {
+            App.<AccountController>openDialog("AccountView", "Akun saya", c -> { });
+            // Jika akun dihapus, Session sudah kosong dan pengguna kembali ke halaman login
+            if (Session.getCurrentUser() == null) {
+                App.setRoot("LoginView");
+            } else {
+                lblNama.setText(Session.getCurrentUser().getName());
+                lblEmail.setText(Session.getCurrentUser().getEmail());
+            }
+        } catch (IOException e) {
+            AlertUtil.showError(e);
+        }
+    }
+
+    @FXML
     private void handleKeluar(ActionEvent event) {
         authService.logout();
         try {
