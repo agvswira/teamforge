@@ -22,10 +22,10 @@ INSERT INTO tasks (id, project_id, title, description, status, priority, due_at,
 (50, 10, 'Rancang database', 'Membuat PDM dan tabel MySQL', 'DONE', 3, '2026-11-10', NULL),
 (51, 10, 'Buat formulir', 'Membuat formulir login dan registrasi', 'TODO', 2, '2026-11-25', NULL);
 
-INSERT INTO task_assignments (task_id, user_id, responsibility) VALUES
-(50, 1, NULL),
-(50, 2, NULL),
-(51, 2, NULL);
+INSERT INTO task_assignments (task_id, user_id) VALUES
+(50, 1),
+(50, 2),
+(51, 2);
 
 INSERT INTO task_dependencies (task_id, prerequisite_task_id) VALUES
 (51, 50);

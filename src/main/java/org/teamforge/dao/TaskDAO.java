@@ -120,19 +120,18 @@ public class TaskDAO implements CrudDAO<Task> {
 
     // Tabel task_assignments
 
-    public void insertAssignment(int taskId, int userId, String responsibility) throws SQLException {
-        String sql = "INSERT INTO task_assignments (task_id, user_id, responsibility) VALUES (?, ?, ?)";
+    public void insertAssignment(int taskId, int userId) throws SQLException {
+        String sql = "INSERT INTO task_assignments (task_id, user_id) VALUES (?, ?)";
         Connection conn = DatabaseConnection.getConnection();
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, taskId);
             ps.setInt(2, userId);
-            ps.setString(3, responsibility);
             ps.executeUpdate();
         }
     }
 
     public List<TaskAssignment> findAssignments(int taskId) throws SQLException {
-        String sql = "SELECT ta.task_id, ta.responsibility, u.* FROM task_assignments ta"
+        String sql = "SELECT ta.task_id, u.* FROM task_assignments ta"
                 + " JOIN users u ON u.id = ta.user_id WHERE ta.task_id = ? ORDER BY u.name";
         List<TaskAssignment> assignments = new ArrayList<>();
         Connection conn = DatabaseConnection.getConnection();
@@ -140,22 +139,10 @@ public class TaskDAO implements CrudDAO<Task> {
             ps.setInt(1, taskId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                assignments.add(new TaskAssignment(rs.getInt("task_id"), UserDAO.readUser(rs),
-                        rs.getString("responsibility")));
+                assignments.add(new TaskAssignment(rs.getInt("task_id"), UserDAO.readUser(rs)));
             }
         }
         return assignments;
-    }
-
-    public void updateResponsibility(int taskId, int userId, String responsibility) throws SQLException {
-        String sql = "UPDATE task_assignments SET responsibility = ? WHERE task_id = ? AND user_id = ?";
-        Connection conn = DatabaseConnection.getConnection();
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, responsibility);
-            ps.setInt(2, taskId);
-            ps.setInt(3, userId);
-            ps.executeUpdate();
-        }
     }
 
     public void deleteAssignment(int taskId, int userId) throws SQLException {

@@ -39,23 +39,23 @@ INSERT INTO tasks (id, project_id, title, description, status, priority, due_at,
 (115, 21, 'Uji performa index', 'Bandingkan waktu query sebelum dan sesudah index.', 'IN_PROGRESS', 2, '2026-11-20', NULL),
 (116, 21, 'Susun laporan', NULL, 'TODO', 1, '2026-11-24', NULL);
 
-INSERT INTO task_assignments (task_id, user_id, responsibility) VALUES
-(101, 14, NULL),
-(102, 11, 'Physical Data Model'), (102, 12, 'DDL dan data contoh'),
-(103, 14, NULL),
-(104, 14, 'Query project dan anggota'), (104, 11, 'Validasi role saat anggota diubah'),
-(105, 12, NULL),
-(106, 13, NULL),
-(107, 13, 'UI tabel dan filter status'), (107, 12, 'Hubungkan tabel ke TaskService'),
-(108, 11, NULL),
-(109, 12, NULL), (109, 14, NULL),
-(110, 11, NULL), (110, 14, NULL),
-(111, 12, NULL),
-(112, 11, NULL), (112, 13, NULL),
-(113, 13, NULL),
-(114, 11, NULL),
-(115, 14, NULL), (115, 11, NULL),
-(116, 12, NULL), (116, 11, NULL);
+INSERT INTO task_assignments (task_id, user_id) VALUES
+(101, 14),
+(102, 11), (102, 12),
+(103, 14),
+(104, 14), (104, 11),
+(105, 12),
+(106, 13),
+(107, 13), (107, 12),
+(108, 11),
+(109, 12), (109, 14),
+(110, 11), (110, 14),
+(111, 12),
+(112, 11), (112, 13),
+(113, 13),
+(114, 11),
+(115, 14), (115, 11),
+(116, 12), (116, 11);
 
 INSERT INTO task_dependencies (task_id, prerequisite_task_id) VALUES
 (103, 102), (104, 103), (105, 102),
