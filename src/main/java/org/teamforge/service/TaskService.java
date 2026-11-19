@@ -28,7 +28,7 @@ public class TaskService {
     private final TaskDAO taskDAO = new TaskDAO();
     private final ProjectService projectService = new ProjectService();
 
-    // Membaca data
+    // ===================== membaca data =====================
 
     // Semua tugas project lengkap dengan penerima dan prasyaratnya
     public List<Task> getTasks(int projectId) throws SQLException {
@@ -83,7 +83,7 @@ public class TaskService {
                 .count();
     }
 
-    // CRUD tugas (Coordinator)
+    // ===================== CRUD tugas (Coordinator) =====================
 
     public Task createTask(int projectId, int actorId, String title, String description, int priority,
                            LocalDate dueAt, List<Integer> assigneeIds, List<Integer> prerequisiteIds)
@@ -105,7 +105,7 @@ public class TaskService {
             conn.setAutoCommit(false);
             taskDAO.insert(task);
             for (int userId : assigneeIds) {
-                taskDAO.insertAssignment(task.getId(), userId, null);
+                taskDAO.insertAssignment(task.getId(), userId);
             }
             for (int prerequisiteId : prerequisiteIds) {
                 taskDAO.insertDependency(task.getId(), prerequisiteId);
@@ -127,15 +127,18 @@ public class TaskService {
         projectService.requireCoordinator(task.getProjectId(), actorId);
         checkTitle(title);
 
+        // Penerima sebelum diubah
         List<Integer> oldAssignees = new ArrayList<>();
         for (TaskAssignment assignment : task.getAssignments()) {
             oldAssignees.add(assignment.getUserId());
         }
+        // Prasyarat sebelum diubah
         List<Integer> oldPrerequisites = new ArrayList<>();
         for (Task prerequisite : task.getPrerequisites()) {
             oldPrerequisites.add(prerequisite.getId());
         }
 
+        // Memeriksa penerima
         for (int userId : oldAssignees) {
             if (!assigneeIds.contains(userId) && task.getStatus() != TaskStatus.TODO) {
                 throw new ValidationException("Penerima hanya dapat dilepas dari tugas berstatus TODO.");
@@ -188,7 +191,7 @@ public class TaskService {
             }
             for (int userId : assigneeIds) {
                 if (!oldAssignees.contains(userId)) {
-                    taskDAO.insertAssignment(taskId, userId, null);
+                    taskDAO.insertAssignment(taskId, userId);
                 }
             }
 
@@ -238,7 +241,7 @@ public class TaskService {
         validateDependency(task, prerequisiteId);
     }
 
-    // Mengerjakan tugas (Coordinator / Member)
+    // ===================== mengerjakan tugas (Coordinator / Member) =====================
 
     public void startTask(int taskId, int actorId) throws SQLException, ValidationException {
         Task task = getTask(taskId);
@@ -274,7 +277,7 @@ public class TaskService {
         taskDAO.updateNotes(taskId, notes);
     }
 
-    // Aturan bantu
+    // ===================== aturan bantu =====================
 
     private void checkTitle(String title) throws ValidationException {
         if (title == null || title.isBlank()) {
