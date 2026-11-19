@@ -53,8 +53,9 @@ PBO Kelas B - Kelompok 3, Informatika Universitas Udayana
        service/                  AuthService, ProjectService, TaskService
                                  (aturan role, prasyarat, dan transaksi)
        exception/                ValidationException, DependencyException
-       controller/               controller untuk setiap file FXML
-       util/                     DatabaseConnection, Session, AlertUtil
+       controller/               satu controller untuk setiap file FXML, ProjectPageController
+                                 sebagai kelas induk halaman di dalam project
+       util/                     DatabaseConnection, Session, AlertUtil, StyleHelper
    src/main/resources/org/teamforge/view/   file tampilan *.fxml
 
 5. TABEL RELASI MANY-TO-MANY DAN OPERASI CRUD
@@ -63,7 +64,7 @@ PBO Kelas B - Kelompok 3, Informatika Universitas Udayana
        U: ubah role                       D: keluarkan anggota
    task_assignments   (users <-> tasks)     : TaskDAO
        C: centang penerima di dialog tugas      R: Kelola tugas, Tugas saya
-       U: ubah tanggung jawab penerima          D: hapus centang penerima
+       D: hapus centang penerima
    task_dependencies  (tasks <-> tasks)     : TaskDAO
        C: tambah prasyarat di dialog tugas      R: Kelola tugas, Tugas saya
        U: lepas satu prasyarat lalu tambah yang lain dalam sekali simpan
