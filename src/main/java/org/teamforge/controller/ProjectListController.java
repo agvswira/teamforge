@@ -11,10 +11,10 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Separator;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 
 import org.teamforge.App;
@@ -41,7 +41,7 @@ public class ProjectListController {
     @FXML private Label lblNama;
     @FXML private Label lblEmail;
     @FXML private Label lblSubjudul;
-    @FXML private FlowPane paneProject;
+    @FXML private TilePane paneProject;
 
     @FXML
     private void initialize() {
@@ -120,7 +120,10 @@ public class ProjectListController {
         deadline.getStyleClass().add("caption");
         HBox footer = new HBox(StyleHelper.avatarGroup(names), footerSpacer, deadline);
         footer.setAlignment(Pos.CENTER_LEFT);
-        card.getChildren().addAll(new Separator(), footer);
+        // Ruang kosong agar garis pemisah dan footer selalu menempel di bawah kartu
+        Region cardSpacer = new Region();
+        VBox.setVgrow(cardSpacer, Priority.ALWAYS);
+        card.getChildren().addAll(cardSpacer, new Separator(), footer);
 
         card.getStyleClass().add("project-card");
         card.setPrefWidth(300);
