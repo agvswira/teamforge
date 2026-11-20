@@ -175,21 +175,51 @@
 
 .hyperlink { -fx-text-fill: -tf-brand; -fx-border-color: transparent; -fx-padding: 0; }
 
-/* Tab filter status bergaris bawah */
-.toggle-button.filter-tab {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
+/* Kanban board di halaman Kelola tugas: kolom tanpa kotak, hanya judul bergaris bawah */
+.kanban-header {
+    -fx-padding: 0 2 8 2;
+    -fx-border-color: transparent transparent -tf-border transparent;
     -fx-border-width: 0 0 2 0;
-    -fx-background-radius: 0;
-    -fx-border-radius: 0;
-    -fx-padding: 6 10 6 10;
+}
+
+.kanban-header-todo { -fx-border-color: transparent transparent #93c5fd transparent; }
+.kanban-header-progress { -fx-border-color: transparent transparent #fdba74 transparent; }
+.kanban-header-done { -fx-border-color: transparent transparent #86efac transparent; }
+
+.kanban-dot {
+    -fx-min-width: 10;
+    -fx-min-height: 10;
+    -fx-max-width: 10;
+    -fx-max-height: 10;
+    -fx-background-radius: 5;
+}
+
+.kanban-dot-todo { -fx-background-color: #2563eb; }
+.kanban-dot-progress { -fx-background-color: #ea580c; }
+.kanban-dot-done { -fx-background-color: #16a34a; }
+
+.kanban-count {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 10;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 10;
+    -fx-padding: 0 8 0 8;
+    -fx-font-size: 12px;
     -fx-text-fill: -tf-text-muted;
 }
 
-.toggle-button.filter-tab:selected {
-    -fx-border-color: transparent transparent -tf-text transparent;
-    -fx-text-fill: -tf-text;
+.kanban-empty {
+    -fx-text-fill: -tf-text-muted;
+    -fx-font-size: 12px;
+    -fx-padding: 16 0 16 0;
+    -fx-border-color: -tf-border;
+    -fx-border-style: segments(4, 4);
+    -fx-border-radius: 10;
+    -fx-alignment: center;
 }
+
+.kanban-list .task-card-late { -fx-border-color: #fecaca; }
+.kanban-list .task-card:hover { -fx-border-color: #bfdbfe; }
 
 /* Input */
 .text-field, .password-field, .text-area, .combo-box, .date-picker {
