@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 
+import org.teamforge.App;
 import org.teamforge.exception.DependencyException;
 import org.teamforge.exception.ValidationException;
 import org.teamforge.model.Task;
@@ -18,15 +20,22 @@ public class AlertUtil {
     private AlertUtil() {
     }
 
+    // Dialog bawaan JavaFX memakai stylesheet yang sama dengan jendela utama
+    public static void applyStyle(Dialog<?> dialog) {
+        dialog.getDialogPane().getStylesheets().add(App.STYLESHEET);
+    }
+
     public static void showInfo(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
         alert.setHeaderText(null);
+        applyStyle(alert);
         alert.showAndWait();
     }
 
     public static void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR, message);
         alert.setHeaderText(null);
+        applyStyle(alert);
         alert.showAndWait();
     }
 
@@ -52,6 +61,7 @@ public class AlertUtil {
     public static boolean confirm(String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message, ButtonType.YES, ButtonType.NO);
         alert.setHeaderText(null);
+        applyStyle(alert);
         Optional<ButtonType> result = alert.showAndWait();
         return result.isPresent() && result.get() == ButtonType.YES;
     }
