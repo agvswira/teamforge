@@ -12,12 +12,9 @@ public interface CrudDAO<T> {
     // CREATE: menyimpan data baru dan mengembalikan id yang dibuat database
     int insert(T item) throws SQLException;
 
-    // READ
     Optional<T> findById(int id) throws SQLException;
 
-    // UPDATE
     void update(T item) throws SQLException;
 
-    // DELETE
     void delete(int id) throws SQLException;
 }
