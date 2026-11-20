@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="700.0" prefWidth="940.0" spacing="14.0" styleClass="page" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.teamforge.controller.MembersController">
+<VBox prefHeight="700.0" prefWidth="940.0" spacing="14.0" styleClass="page" stylesheets="@../css/teamforge.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.teamforge.controller.MembersController">
     <children>
         <VBox>
             <children>

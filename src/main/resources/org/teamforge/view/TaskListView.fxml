@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="700.0" prefWidth="940.0" spacing="14.0" styleClass="page" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.teamforge.controller.TaskListController">
+<VBox prefHeight="700.0" prefWidth="940.0" spacing="14.0" styleClass="page" stylesheets="@../css/teamforge.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.teamforge.controller.TaskListController">
     <fx:define>
         <ToggleGroup fx:id="filterGroup" />
     </fx:define>

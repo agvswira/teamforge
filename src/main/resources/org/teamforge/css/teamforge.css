@@ -1,0 +1,373 @@
+/*
+ * TeamForge - gaya tampilan mengikuti desain Figma "PBO · TeamForge (Tugas 2)".
+ * Warna netral abu-abu, biru untuk aksi utama, satu warna untuk setiap status.
+ */
+
+/* Warna dan font dasar */
+.root {
+    -tf-canvas: #f7f7f8;
+    -tf-surface: #ffffff;
+    -tf-muted: #f4f4f5;
+    -tf-border: #e4e4e7;
+    -tf-text: #09090b;
+    -tf-text-muted: #71717a;
+    -tf-brand: #2563eb;
+    -tf-brand-dark: #1d4ed8;
+    -tf-brand-soft: #eff6ff;
+
+    -fx-accent: -tf-brand;
+    -fx-focus-color: -tf-brand;
+    -fx-faint-focus-color: transparent;
+    -fx-selection-bar: -tf-brand-soft;
+    -fx-selection-bar-non-focused: -tf-brand-soft;
+    -fx-text-background-color: -tf-text;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-background-color: -tf-canvas;
+}
+
+/* Teks */
+.label { -fx-text-fill: -tf-text; }
+.page-title { -fx-font-size: 26px; -fx-font-weight: bold; }
+.h2 { -fx-font-size: 20px; -fx-font-weight: bold; }
+.h3 { -fx-font-size: 15px; -fx-font-weight: bold; }
+.strong { -fx-font-weight: bold; }
+.muted { -fx-text-fill: -tf-text-muted; }
+.caption { -fx-font-size: 12px; -fx-text-fill: -tf-text-muted; }
+.field-label { -fx-font-weight: bold; -fx-padding: 4 0 0 0; }
+.section-label { -fx-font-weight: bold; -fx-padding: 6 0 0 0; }
+.stat-value { -fx-font-size: 28px; -fx-font-weight: bold; }
+.error-text, .text-overdue { -fx-text-fill: #b91c1c; }
+.text-blocked { -fx-text-fill: #b45309; }
+
+/* Kerangka halaman */
+.app-root { -fx-background-color: -tf-canvas; }
+
+.main-panel {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 12;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 12;
+}
+
+.topbar {
+    -fx-padding: 12 24 12 24;
+    -fx-border-color: transparent transparent -tf-border transparent;
+}
+
+.page {
+    -fx-padding: 24 28 24 28;
+    -fx-background-color: -tf-surface;
+}
+
+.page-scroll, .page-scroll > .viewport {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.logo {
+    -fx-background-color: -tf-brand;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-min-width: 30;
+    -fx-min-height: 30;
+}
+
+/* Sidebar */
+.sidebar { -fx-padding: 12 14 12 14; }
+
+.sidebar-section {
+    -fx-font-size: 12px;
+    -fx-text-fill: -tf-text-muted;
+    -fx-padding: 12 4 4 4;
+}
+
+.project-box {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 10;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 10;
+    -fx-padding: 10 12 10 12;
+}
+
+.button.nav-item, .toggle-button.nav-item {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-alignment: center-left;
+    -fx-font-weight: normal;
+    -fx-padding: 8 12 8 12;
+}
+
+.button.nav-item:hover, .toggle-button.nav-item:hover { -fx-background-color: #ececee; }
+
+.toggle-button.nav-item:selected {
+    -fx-background-color: -tf-surface;
+    -fx-border-color: -tf-border;
+    -fx-font-weight: bold;
+}
+
+/* Badge dan status */
+.chip {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-padding: 1 7 1 7;
+    -fx-font-size: 11px;
+    -fx-background-color: #f1f5f9;
+    -fx-border-color: #e2e8f0;
+    -fx-text-fill: #334155;
+}
+
+.chip-brand, .chip-todo { -fx-background-color: #eff6ff; -fx-border-color: #bfdbfe; -fx-text-fill: #1d4ed8; }
+.chip-progress { -fx-background-color: #fff7ed; -fx-border-color: #fed7aa; -fx-text-fill: #c2410c; }
+.chip-done { -fx-background-color: #f0fdf4; -fx-border-color: #bbf7d0; -fx-text-fill: #15803d; }
+.chip-overdue { -fx-background-color: #fef2f2; -fx-border-color: #fecaca; -fx-text-fill: #b91c1c; }
+.chip-blocked { -fx-background-color: #fffbeb; -fx-border-color: #fde68a; -fx-text-fill: #b45309; }
+
+/* Titik warna di depan teks status */
+.status-text .dot {
+    -fx-min-width: 8;
+    -fx-min-height: 8;
+    -fx-max-width: 8;
+    -fx-max-height: 8;
+    -fx-background-radius: 4;
+}
+
+.status-todo .dot { -fx-background-color: #2563eb; }
+.status-todo .label { -fx-text-fill: #1d4ed8; }
+.status-progress .dot { -fx-background-color: #ea580c; }
+.status-progress .label { -fx-text-fill: #c2410c; }
+.status-done .dot { -fx-background-color: #16a34a; }
+.status-done .label { -fx-text-fill: #15803d; }
+.status-overdue .dot { -fx-background-color: #dc2626; }
+.status-overdue .label { -fx-text-fill: #b91c1c; }
+.status-blocked .dot { -fx-background-color: #d97706; }
+.status-blocked .label { -fx-text-fill: #b45309; }
+
+/* Tombol */
+.button, .toggle-button {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 8;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 8;
+    -fx-text-fill: -tf-text;
+    -fx-font-weight: bold;
+    -fx-padding: 7 14 7 14;
+    -fx-cursor: hand;
+}
+
+.button:hover { -fx-background-color: -tf-muted; }
+.button:disabled { -fx-opacity: 0.45; }
+
+.button.primary, .button:default {
+    -fx-background-color: -tf-brand;
+    -fx-border-color: -tf-brand;
+    -fx-text-fill: white;
+}
+
+.button.primary:hover, .button:default:hover { -fx-background-color: -tf-brand-dark; }
+
+.button.danger { -fx-text-fill: #b91c1c; -fx-border-color: #fecaca; }
+.button.danger:hover { -fx-background-color: #fef2f2; }
+.button.small { -fx-padding: 3 10 3 10; -fx-font-size: 12px; }
+
+.hyperlink { -fx-text-fill: -tf-brand; -fx-border-color: transparent; -fx-padding: 0; }
+
+/* Tab filter status bergaris bawah */
+.toggle-button.filter-tab {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 2 0;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-padding: 6 10 6 10;
+    -fx-text-fill: -tf-text-muted;
+}
+
+.toggle-button.filter-tab:selected {
+    -fx-border-color: transparent transparent -tf-text transparent;
+    -fx-text-fill: -tf-text;
+}
+
+/* Input */
+.text-field, .password-field, .text-area, .combo-box, .date-picker {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 8;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 8;
+}
+
+.text-field, .password-field { -fx-padding: 7 10 7 10; }
+
+.text-field:focused, .password-field:focused, .text-area:focused,
+.combo-box:focused, .date-picker:focused {
+    -fx-border-color: -tf-brand;
+}
+
+.text-area .content { -fx-background-color: -tf-surface; -fx-background-radius: 8; }
+.date-picker > .text-field { -fx-background-color: transparent; -fx-border-color: transparent; }
+.combo-box > .list-cell { -fx-background-color: transparent; -fx-padding: 5 10 5 10; }
+.date-picker > .arrow-button, .combo-box > .arrow-button { -fx-background-color: transparent; }
+
+.check-box > .box {
+    -fx-background-color: -tf-surface;
+    -fx-border-color: #d4d4d8;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.check-box:selected > .box { -fx-background-color: -tf-brand; -fx-border-color: -tf-brand; }
+.check-box:selected > .box > .mark { -fx-background-color: white; }
+
+/* Kartu dan daftar */
+.card {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 12;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 12;
+    -fx-padding: 16;
+}
+
+.card-flush { -fx-padding: 0; }
+.card-header { -fx-padding: 14 16 10 16; }
+
+.list-row {
+    -fx-padding: 12 16 12 16;
+    -fx-border-color: -tf-border transparent transparent transparent;
+}
+
+.info-banner {
+    -fx-background-color: #f1f5f9;
+    -fx-background-radius: 8;
+    -fx-padding: 10 14 10 14;
+}
+
+.message-success, .message-error {
+    -fx-background-radius: 8;
+    -fx-padding: 8 12 8 12;
+}
+
+.message-success { -fx-background-color: #f0fdf4; -fx-text-fill: #15803d; }
+.message-error { -fx-background-color: #fef2f2; -fx-text-fill: #b91c1c; }
+
+.project-card {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 12;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 12;
+    -fx-padding: 16;
+    -fx-cursor: hand;
+}
+
+.project-card:hover { -fx-border-color: #bfdbfe; }
+.card-title { -fx-font-size: 15px; -fx-font-weight: bold; }
+
+.task-card {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 10;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 10;
+    -fx-padding: 10 12 10 12;
+    -fx-cursor: hand;
+}
+
+.task-card-selected { -fx-border-color: -tf-brand; }
+
+.prereq-row, .check-list {
+    -fx-background-color: -tf-canvas;
+    -fx-background-radius: 8;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 8;
+    -fx-padding: 8 12 8 12;
+}
+
+/* Login */
+.auth-hero { -fx-background-color: -tf-brand-soft; -fx-background-radius: 12; }
+
+.auth-form {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 12;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 12;
+}
+
+/* Dialog */
+.dialog {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 12;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 12;
+    -fx-padding: 24;
+}
+
+.dialog-footer { -fx-padding: 14 0 0 0; }
+
+.dialog-pane { -fx-background-color: -tf-surface; }
+
+/* Progress bar */
+.progress-bar > .track { -fx-background-color: -tf-muted; -fx-background-radius: 6; -fx-background-insets: 0; }
+.progress-bar > .bar { -fx-background-color: -tf-brand; -fx-background-radius: 6; -fx-background-insets: 0; -fx-padding: 3; }
+
+/* Tabel */
+.table-view {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 12;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 12;
+    -fx-padding: 0;
+    -fx-table-cell-border-color: transparent;
+}
+
+.table-view .column-header-background { -fx-background-color: -tf-canvas; -fx-background-radius: 12 12 0 0; }
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent -tf-border transparent;
+    -fx-size: 36px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: -tf-text-muted;
+    -fx-font-weight: normal;
+    -fx-alignment: center-left;
+    -fx-padding: 0 12 0 12;
+}
+
+.table-row-cell {
+    -fx-cell-size: 48px;
+    -fx-background-color: -tf-surface;
+    -fx-border-color: transparent transparent -tf-border transparent;
+}
+
+.table-row-cell:empty { -fx-background-color: transparent; -fx-border-color: transparent; }
+.table-row-cell:selected { -fx-background-color: -tf-brand-soft; }
+.table-cell { -fx-padding: 0 12 0 12; -fx-alignment: center-left; -fx-text-fill: -tf-text; }
+
+/* Scroll bar tipis */
+.scroll-bar { -fx-background-color: transparent; }
+.scroll-bar > .thumb { -fx-background-color: #d4d4d8; -fx-background-radius: 6; }
+.scroll-bar > .increment-button, .scroll-bar > .decrement-button { -fx-padding: 0; }
+.scroll-bar > .increment-button > .increment-arrow,
+.scroll-bar > .decrement-button > .decrement-arrow { -fx-shape: " "; -fx-padding: 0; }
+
+/* Avatar */
+.avatar {
+    -fx-min-width: 26;
+    -fx-min-height: 26;
+    -fx-max-width: 26;
+    -fx-max-height: 26;
+    -fx-background-radius: 13;
+    -fx-alignment: center;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.avatar-0 { -fx-background-color: #0f766e; }
+.avatar-1 { -fx-background-color: #7c3aed; }
+.avatar-2 { -fx-background-color: #be123c; }
+.avatar-3 { -fx-background-color: #1d4ed8; }
+.avatar-4 { -fx-background-color: #b45309; }
+.avatar-5 { -fx-background-color: #4d7c0f; }

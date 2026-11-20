@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefWidth="480.0" spacing="6.0" styleClass="dialog" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.teamforge.controller.ProjectFormController">
+<VBox prefWidth="480.0" spacing="6.0" styleClass="dialog" stylesheets="@../css/teamforge.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.teamforge.controller.ProjectFormController">
     <children>
         <Label fx:id="lblJudul" styleClass="h2" text="Buat project" />
         <Label styleClass="field-label" text="Nama project" />
