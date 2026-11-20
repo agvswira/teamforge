@@ -1,0 +1,186 @@
+/*
+ * TeamForge - gaya tampilan mengikuti desain Figma "PBO · TeamForge (Tugas 2)".
+ * Warna netral abu-abu, biru untuk aksi utama, satu warna untuk setiap status.
+ */
+
+/* Warna dan font dasar */
+.root {
+    -tf-canvas: #f7f7f8;
+    -tf-surface: #ffffff;
+    -tf-muted: #f4f4f5;
+    -tf-border: #e4e4e7;
+    -tf-text: #09090b;
+    -tf-text-muted: #71717a;
+    -tf-brand: #2563eb;
+    -tf-brand-dark: #1d4ed8;
+    -tf-brand-soft: #eff6ff;
+
+    -fx-accent: -tf-brand;
+    -fx-focus-color: -tf-brand;
+    -fx-faint-focus-color: transparent;
+    -fx-selection-bar: -tf-brand-soft;
+    -fx-selection-bar-non-focused: -tf-brand-soft;
+    -fx-text-background-color: -tf-text;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-background-color: -tf-canvas;
+}
+
+/* Teks */
+.label { -fx-text-fill: -tf-text; }
+.page-title { -fx-font-size: 26px; -fx-font-weight: bold; }
+.h2 { -fx-font-size: 20px; -fx-font-weight: bold; }
+.h3 { -fx-font-size: 15px; -fx-font-weight: bold; }
+.strong { -fx-font-weight: bold; }
+.muted { -fx-text-fill: -tf-text-muted; }
+.caption { -fx-font-size: 12px; -fx-text-fill: -tf-text-muted; }
+.field-label { -fx-font-weight: bold; -fx-padding: 4 0 0 0; }
+.section-label { -fx-font-weight: bold; -fx-padding: 6 0 0 0; }
+.stat-value { -fx-font-size: 28px; -fx-font-weight: bold; }
+.error-text, .text-overdue { -fx-text-fill: #b91c1c; }
+.text-blocked { -fx-text-fill: #b45309; }
+
+/* Kerangka halaman */
+.app-root { -fx-background-color: -tf-canvas; }
+
+.main-panel {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 12;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 12;
+}
+
+.topbar {
+    -fx-padding: 12 24 12 24;
+    -fx-border-color: transparent transparent -tf-border transparent;
+}
+
+.page {
+    -fx-padding: 24 28 24 28;
+    -fx-background-color: -tf-surface;
+}
+
+.page-scroll, .page-scroll > .viewport {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.logo {
+    -fx-background-color: -tf-brand;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-min-width: 30;
+    -fx-min-height: 30;
+}
+
+/* Sidebar */
+.sidebar { -fx-padding: 12 14 12 14; }
+
+.sidebar-section {
+    -fx-font-size: 12px;
+    -fx-text-fill: -tf-text-muted;
+    -fx-padding: 12 4 4 4;
+}
+
+.project-box {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 10;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 10;
+    -fx-padding: 10 12 10 12;
+}
+
+.button.nav-item, .toggle-button.nav-item {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-alignment: center-left;
+    -fx-font-weight: normal;
+    -fx-padding: 8 12 8 12;
+}
+
+.button.nav-item:hover, .toggle-button.nav-item:hover { -fx-background-color: #ececee; }
+
+.toggle-button.nav-item:selected {
+    -fx-background-color: -tf-surface;
+    -fx-border-color: -tf-border;
+    -fx-font-weight: bold;
+}
+
+/* Tombol */
+.button, .toggle-button {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 8;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 8;
+    -fx-text-fill: -tf-text;
+    -fx-font-weight: bold;
+    -fx-padding: 7 14 7 14;
+    -fx-cursor: hand;
+}
+
+.button:hover { -fx-background-color: -tf-muted; }
+.button:disabled { -fx-opacity: 0.45; }
+
+.button.primary, .button:default {
+    -fx-background-color: -tf-brand;
+    -fx-border-color: -tf-brand;
+    -fx-text-fill: white;
+}
+
+.button.primary:hover, .button:default:hover { -fx-background-color: -tf-brand-dark; }
+
+.button.danger { -fx-text-fill: #b91c1c; -fx-border-color: #fecaca; }
+.button.danger:hover { -fx-background-color: #fef2f2; }
+.button.small { -fx-padding: 3 10 3 10; -fx-font-size: 12px; }
+
+.hyperlink { -fx-text-fill: -tf-brand; -fx-border-color: transparent; -fx-padding: 0; }
+
+/* Tab filter status bergaris bawah */
+.toggle-button.filter-tab {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 2 0;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-padding: 6 10 6 10;
+    -fx-text-fill: -tf-text-muted;
+}
+
+.toggle-button.filter-tab:selected {
+    -fx-border-color: transparent transparent -tf-text transparent;
+    -fx-text-fill: -tf-text;
+}
+
+/* Input */
+.text-field, .password-field, .text-area, .combo-box, .date-picker {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 8;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 8;
+}
+
+.text-field, .password-field { -fx-padding: 7 10 7 10; }
+
+.text-field:focused, .password-field:focused, .text-area:focused,
+.combo-box:focused, .date-picker:focused {
+    -fx-border-color: -tf-brand;
+}
+
+.text-area .content { -fx-background-color: -tf-surface; -fx-background-radius: 8; }
+.date-picker > .text-field { -fx-background-color: transparent; -fx-border-color: transparent; }
+.combo-box > .list-cell { -fx-background-color: transparent; -fx-padding: 5 10 5 10; }
+.date-picker > .arrow-button, .combo-box > .arrow-button { -fx-background-color: transparent; }
+
+.check-box > .box {
+    -fx-background-color: -tf-surface;
+    -fx-border-color: #d4d4d8;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.check-box:selected > .box { -fx-background-color: -tf-brand; -fx-border-color: -tf-brand; }
+.check-box:selected > .box > .mark { -fx-background-color: white; }
+
