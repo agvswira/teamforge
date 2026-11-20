@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="760.0" prefWidth="1180.0" styleClass="app-root" stylesheets="@../css/teamforge.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.teamforge.controller.ProjectListController">
+<VBox prefHeight="760.0" prefWidth="1180.0" styleClass="app-root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.teamforge.controller.ProjectListController">
     <children>
         <VBox styleClass="main-panel" VBox.vgrow="ALWAYS">
             <children>
