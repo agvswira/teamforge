@@ -109,6 +109,43 @@
     -fx-font-weight: bold;
 }
 
+/* Badge dan status */
+.chip {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-padding: 1 7 1 7;
+    -fx-font-size: 11px;
+    -fx-background-color: #f1f5f9;
+    -fx-border-color: #e2e8f0;
+    -fx-text-fill: #334155;
+}
+
+.chip-brand, .chip-todo { -fx-background-color: #eff6ff; -fx-border-color: #bfdbfe; -fx-text-fill: #1d4ed8; }
+.chip-progress { -fx-background-color: #fff7ed; -fx-border-color: #fed7aa; -fx-text-fill: #c2410c; }
+.chip-done { -fx-background-color: #f0fdf4; -fx-border-color: #bbf7d0; -fx-text-fill: #15803d; }
+.chip-overdue { -fx-background-color: #fef2f2; -fx-border-color: #fecaca; -fx-text-fill: #b91c1c; }
+.chip-blocked { -fx-background-color: #fffbeb; -fx-border-color: #fde68a; -fx-text-fill: #b45309; }
+
+/* Titik warna di depan teks status */
+.status-text .dot {
+    -fx-min-width: 8;
+    -fx-min-height: 8;
+    -fx-max-width: 8;
+    -fx-max-height: 8;
+    -fx-background-radius: 4;
+}
+
+.status-todo .dot { -fx-background-color: #2563eb; }
+.status-todo .label { -fx-text-fill: #1d4ed8; }
+.status-progress .dot { -fx-background-color: #ea580c; }
+.status-progress .label { -fx-text-fill: #c2410c; }
+.status-done .dot { -fx-background-color: #16a34a; }
+.status-done .label { -fx-text-fill: #15803d; }
+.status-overdue .dot { -fx-background-color: #dc2626; }
+.status-overdue .label { -fx-text-fill: #b91c1c; }
+.status-blocked .dot { -fx-background-color: #d97706; }
+.status-blocked .label { -fx-text-fill: #b45309; }
+
 /* Tombol */
 .button, .toggle-button {
     -fx-background-color: -tf-surface;
@@ -183,4 +220,89 @@
 
 .check-box:selected > .box { -fx-background-color: -tf-brand; -fx-border-color: -tf-brand; }
 .check-box:selected > .box > .mark { -fx-background-color: white; }
+
+/* Kartu dan daftar */
+.card {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 12;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 12;
+    -fx-padding: 16;
+}
+
+.card-flush { -fx-padding: 0; }
+.card-header { -fx-padding: 14 16 10 16; }
+
+.list-row {
+    -fx-padding: 12 16 12 16;
+    -fx-border-color: -tf-border transparent transparent transparent;
+}
+
+.info-banner {
+    -fx-background-color: #f1f5f9;
+    -fx-background-radius: 8;
+    -fx-padding: 10 14 10 14;
+}
+
+.message-success, .message-error {
+    -fx-background-radius: 8;
+    -fx-padding: 8 12 8 12;
+}
+
+.message-success { -fx-background-color: #f0fdf4; -fx-text-fill: #15803d; }
+.message-error { -fx-background-color: #fef2f2; -fx-text-fill: #b91c1c; }
+
+.project-card {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 12;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 12;
+    -fx-padding: 16;
+    -fx-cursor: hand;
+}
+
+.project-card:hover { -fx-border-color: #bfdbfe; }
+.card-title { -fx-font-size: 15px; -fx-font-weight: bold; }
+
+.task-card {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 10;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 10;
+    -fx-padding: 10 12 10 12;
+    -fx-cursor: hand;
+}
+
+.task-card-selected { -fx-border-color: -tf-brand; }
+
+.prereq-row, .check-list {
+    -fx-background-color: -tf-canvas;
+    -fx-background-radius: 8;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 8;
+    -fx-padding: 8 12 8 12;
+}
+
+/* Login */
+.auth-hero { -fx-background-color: -tf-brand-soft; -fx-background-radius: 12; }
+
+.auth-form {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 12;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 12;
+}
+
+/* Dialog */
+.dialog {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 12;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 12;
+    -fx-padding: 24;
+}
+
+.dialog-footer { -fx-padding: 14 0 0 0; }
+
+.dialog-pane { -fx-background-color: -tf-surface; }
 
