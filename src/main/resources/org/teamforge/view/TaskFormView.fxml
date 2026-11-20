@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefWidth="560.0" spacing="6.0" styleClass="dialog" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.teamforge.controller.TaskFormController">
+<VBox prefWidth="560.0" spacing="6.0" styleClass="dialog" stylesheets="@../css/teamforge.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.teamforge.controller.TaskFormController">
     <children>
         <Label fx:id="lblJudul" styleClass="h2" text="Tugas baru" />
         <Label styleClass="field-label" text="Judul tugas" />

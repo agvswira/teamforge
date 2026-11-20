@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="700.0" prefWidth="940.0" spacing="14.0" styleClass="page" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.teamforge.controller.MyTasksController">
+<VBox prefHeight="700.0" prefWidth="940.0" spacing="14.0" styleClass="page" stylesheets="@../css/teamforge.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.teamforge.controller.MyTasksController">
     <children>
         <Label styleClass="page-title" text="Tugas saya" />
         <HBox spacing="16.0" VBox.vgrow="ALWAYS">

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox prefHeight="760.0" prefWidth="1180.0" spacing="8.0" styleClass="app-root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.teamforge.controller.LoginController">
+<HBox prefHeight="760.0" prefWidth="1180.0" spacing="8.0" styleClass="app-root" stylesheets="@../css/teamforge.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.teamforge.controller.LoginController">
     <children>
         <VBox alignment="CENTER" spacing="12.0" styleClass="auth-hero" HBox.hgrow="ALWAYS">
             <children>
