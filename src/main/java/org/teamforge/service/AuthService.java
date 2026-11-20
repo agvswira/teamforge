@@ -14,7 +14,7 @@ import org.teamforge.model.User;
 import org.teamforge.util.Session;
 
 /**
- * Registrasi, login, dan logout.
+ * Registrasi, login, logout, ubah profil, dan hapus akun.
  * Password disimpan sebagai hash dengan format salt$sha256(salt + password), bukan password asli.
  */
 public class AuthService {
@@ -97,7 +97,7 @@ public class AuthService {
         return cleanEmail;
     }
 
-    // ===================== hash password =====================
+    // Hash password
 
     private String hashPassword(String password) {
         byte[] saltBytes = new byte[8];

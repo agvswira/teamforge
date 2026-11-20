@@ -105,7 +105,7 @@ public class TaskService {
             conn.setAutoCommit(false);
             taskDAO.insert(task);
             for (int userId : assigneeIds) {
-                taskDAO.insertAssignment(task.getId(), userId, null);
+                taskDAO.insertAssignment(task.getId(), userId);
             }
             for (int prerequisiteId : prerequisiteIds) {
                 taskDAO.insertDependency(task.getId(), prerequisiteId);
@@ -188,7 +188,7 @@ public class TaskService {
             }
             for (int userId : assigneeIds) {
                 if (!oldAssignees.contains(userId)) {
-                    taskDAO.insertAssignment(taskId, userId, null);
+                    taskDAO.insertAssignment(taskId, userId);
                 }
             }
 
