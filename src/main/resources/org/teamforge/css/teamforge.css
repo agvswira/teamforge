@@ -306,3 +306,68 @@
 
 .dialog-pane { -fx-background-color: -tf-surface; }
 
+/* Progress bar */
+.progress-bar > .track { -fx-background-color: -tf-muted; -fx-background-radius: 6; -fx-background-insets: 0; }
+.progress-bar > .bar { -fx-background-color: -tf-brand; -fx-background-radius: 6; -fx-background-insets: 0; -fx-padding: 3; }
+
+/* Tabel */
+.table-view {
+    -fx-background-color: -tf-surface;
+    -fx-background-radius: 12;
+    -fx-border-color: -tf-border;
+    -fx-border-radius: 12;
+    -fx-padding: 0;
+    -fx-table-cell-border-color: transparent;
+}
+
+.table-view .column-header-background { -fx-background-color: -tf-canvas; -fx-background-radius: 12 12 0 0; }
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent -tf-border transparent;
+    -fx-size: 36px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: -tf-text-muted;
+    -fx-font-weight: normal;
+    -fx-alignment: center-left;
+    -fx-padding: 0 12 0 12;
+}
+
+.table-row-cell {
+    -fx-cell-size: 48px;
+    -fx-background-color: -tf-surface;
+    -fx-border-color: transparent transparent -tf-border transparent;
+}
+
+.table-row-cell:empty { -fx-background-color: transparent; -fx-border-color: transparent; }
+.table-row-cell:selected { -fx-background-color: -tf-brand-soft; }
+.table-cell { -fx-padding: 0 12 0 12; -fx-alignment: center-left; -fx-text-fill: -tf-text; }
+
+/* Scroll bar tipis */
+.scroll-bar { -fx-background-color: transparent; }
+.scroll-bar > .thumb { -fx-background-color: #d4d4d8; -fx-background-radius: 6; }
+.scroll-bar > .increment-button, .scroll-bar > .decrement-button { -fx-padding: 0; }
+.scroll-bar > .increment-button > .increment-arrow,
+.scroll-bar > .decrement-button > .decrement-arrow { -fx-shape: " "; -fx-padding: 0; }
+
+/* Avatar */
+.avatar {
+    -fx-min-width: 26;
+    -fx-min-height: 26;
+    -fx-max-width: 26;
+    -fx-max-height: 26;
+    -fx-background-radius: 13;
+    -fx-alignment: center;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.avatar-0 { -fx-background-color: #0f766e; }
+.avatar-1 { -fx-background-color: #7c3aed; }
+.avatar-2 { -fx-background-color: #be123c; }
+.avatar-3 { -fx-background-color: #1d4ed8; }
+.avatar-4 { -fx-background-color: #b45309; }
+.avatar-5 { -fx-background-color: #4d7c0f; }
