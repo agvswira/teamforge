@@ -52,7 +52,7 @@
                                         </GridPane>
                                         <Label styleClass="section-label" text="Prasyarat" />
                                         <VBox fx:id="listPrasyarat" spacing="6.0" />
-                                        <Label styleClass="section-label" text="Catatan pekerjaan" />
+                                        <Label styleClass="section-label" text="Catatan tugas dan hasil" />
                                         <TextArea fx:id="txtCatatan" prefRowCount="3" wrapText="true" />
                                         <HBox spacing="8.0">
                                             <children>
