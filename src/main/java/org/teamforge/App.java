@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -28,6 +29,8 @@ public class App extends Application {
         Locale.setDefault(Locale.forLanguageTag("id-ID"));
         scene = new Scene(loadFXML("LoginView"), 1180, 760);
         stage.setTitle("TeamForge");
+        // Ikon jendela dan taskbar memakai logo TeamForge
+        stage.getIcons().add(new Image(App.class.getResource("img/icon.png").toExternalForm()));
         stage.setMinWidth(980);
         stage.setMinHeight(640);
         stage.setScene(scene);

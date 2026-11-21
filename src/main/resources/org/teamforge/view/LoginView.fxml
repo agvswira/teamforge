@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -14,7 +16,11 @@
     <children>
         <VBox alignment="CENTER" spacing="12.0" styleClass="auth-hero" HBox.hgrow="ALWAYS">
             <children>
-                <Label styleClass="logo" text="TF" />
+                <ImageView fitHeight="72.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../img/logo.png" />
+                    </image>
+                </ImageView>
                 <Label styleClass="page-title" text="TeamForge" />
                 <Label styleClass="muted" text="Kelola tugas kelompok dan pantau progresnya." />
             </children>

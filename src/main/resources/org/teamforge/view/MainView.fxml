@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -20,7 +22,11 @@
             <children>
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <children>
-                        <Label styleClass="logo" text="TF" />
+                        <ImageView fitHeight="24.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../img/logo.png" />
+                            </image>
+                        </ImageView>
                         <Label styleClass="strong" text="TeamForge" />
                     </children>
                     <VBox.margin>
