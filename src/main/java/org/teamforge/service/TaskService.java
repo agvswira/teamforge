@@ -269,9 +269,13 @@ public class TaskService {
         taskDAO.updateStatus(task);
     }
 
+    // Coordinator boleh mengubah catatan tugas siapa pun, Member hanya catatan tugasnya sendiri
     public void saveNotes(int taskId, int actorId, String notes) throws SQLException, ValidationException {
         Task task = getTask(taskId);
-        checkAssignee(task, actorId);
+        ProjectMembership membership = projectService.requireMembership(task.getProjectId(), actorId);
+        if (!membership.canManageProject()) {
+            checkAssignee(task, actorId);
+        }
         taskDAO.updateNotes(taskId, notes);
     }
 
