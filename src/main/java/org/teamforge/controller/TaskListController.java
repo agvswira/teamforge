@@ -143,26 +143,50 @@ public class TaskListController extends ProjectPageController {
         return card;
     }
 
-    // Tombol Ubah, lalu Hapus (tugas belum DONE) atau Buka lagi (tugas DONE)
+    // Tombol Ubah dan Hapus di kiri, tombol pindah status (Mulai / Selesai / Buka lagi) di kanan
     private HBox createActions(Task task) {
         Button edit = new Button("Ubah");
         edit.getStyleClass().add("small");
         edit.setOnAction(e -> main.openTaskForm(task));
-
-        Button second;
-        if (task.getStatus() == TaskStatus.DONE) {
-            second = new Button("Buka lagi");
-            second.setOnAction(e -> reopenTask(task));
-        } else {
-            second = new Button("Hapus");
-            second.getStyleClass().add("danger");
-            second.setDisable(deleteBlockers.containsKey(task.getId()));
-            second.setOnAction(e -> deleteTask(task));
-        }
-        second.getStyleClass().add("small");
-        HBox box = new HBox(6, edit, second);
+        HBox box = new HBox(6, edit);
         box.setAlignment(Pos.CENTER_LEFT);
+
+        if (task.getStatus() == TaskStatus.TODO) {
+            Button delete = new Button("Hapus");
+            delete.getStyleClass().addAll("small", "danger");
+            delete.setDisable(deleteBlockers.containsKey(task.getId()));
+            delete.setOnAction(e -> deleteTask(task));
+            box.getChildren().add(delete);
+        }
+
+        Region space = new Region();
+        HBox.setHgrow(space, Priority.ALWAYS);
+        box.getChildren().addAll(space, createStatusButton(task));
         return box;
+    }
+
+    // Coordinator dapat memindahkan tugas siapa pun ke kolom berikutnya
+    private Button createStatusButton(Task task) {
+        Button button = new Button();
+        button.getStyleClass().add("small");
+        switch (task.getStatus()) {
+            case TODO -> {
+                button.setText("Mulai");
+                button.getStyleClass().add("primary");
+                button.setDisable(task.isBlocked());
+                button.setOnAction(e -> startTask(task));
+            }
+            case IN_PROGRESS -> {
+                button.setText("Selesai");
+                button.getStyleClass().add("primary");
+                button.setOnAction(e -> completeTask(task));
+            }
+            case DONE -> {
+                button.setText("Buka lagi");
+                button.setOnAction(e -> reopenTask(task));
+            }
+        }
+        return button;
     }
 
     private List<String> assigneeNames(Task task) {
@@ -195,6 +219,24 @@ public class TaskListController extends ProjectPageController {
         }
         try {
             taskService.deleteTask(task.getId(), user.getId());
+            main.refreshCurrentPage();
+        } catch (ValidationException | SQLException e) {
+            AlertUtil.showError(e);
+        }
+    }
+
+    private void startTask(Task task) {
+        try {
+            taskService.startTask(task.getId(), user.getId());
+            main.refreshCurrentPage();
+        } catch (ValidationException | SQLException e) {
+            AlertUtil.showError(e);
+        }
+    }
+
+    private void completeTask(Task task) {
+        try {
+            taskService.completeTask(task.getId(), user.getId());
             main.refreshCurrentPage();
         } catch (ValidationException | SQLException e) {
             AlertUtil.showError(e);
