@@ -1,7 +1,6 @@
 package org.teamforge.util;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import javafx.geometry.Pos;
@@ -115,10 +114,6 @@ public class StyleHelper {
             return "-";
         }
         return date.getDayOfMonth() + " " + BULAN[date.getMonthValue() - 1];
-    }
-
-    public static long daysFromToday(LocalDate date) {
-        return ChronoUnit.DAYS.between(LocalDate.now(), date);
     }
 
     // Menampilkan atau menyembunyikan komponen beserta ruangnya
