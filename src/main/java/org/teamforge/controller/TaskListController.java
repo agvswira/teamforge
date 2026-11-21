@@ -12,8 +12,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -137,19 +142,26 @@ public class TaskListController extends ProjectPageController {
         info.setAlignment(Pos.CENTER_LEFT);
         card.getChildren().add(info);
 
-        if (isCoordinator()) {
-            card.getChildren().add(createActions(task));
-        }
+        card.getChildren().add(createActions(task));
         return card;
     }
 
-    // Tombol Ubah dan Hapus di kiri, tombol pindah status (Mulai / Selesai / Buka lagi) di kanan
+    // Tombol Detail, Ubah, dan Hapus di kiri, tombol pindah status (Mulai / Selesai / Buka lagi) di kanan.
+    // Member hanya mendapat tombol Detail.
     private HBox createActions(Task task) {
+        Button view = new Button("Detail");
+        view.getStyleClass().add("small");
+        view.setOnAction(e -> showDetail(task));
+        HBox box = new HBox(6, view);
+        box.setAlignment(Pos.CENTER_LEFT);
+        if (!isCoordinator()) {
+            return box;
+        }
+
         Button edit = new Button("Ubah");
         edit.getStyleClass().add("small");
         edit.setOnAction(e -> main.openTaskForm(task));
-        HBox box = new HBox(6, edit);
-        box.setAlignment(Pos.CENTER_LEFT);
+        box.getChildren().add(edit);
 
         if (task.getStatus() == TaskStatus.TODO) {
             Button delete = new Button("Hapus");
@@ -187,6 +199,71 @@ public class TaskListController extends ProjectPageController {
             }
         }
         return button;
+    }
+
+    // Detail tugas beserta catatan tugas dan hasil.
+    // Coordinator dapat mengubah dan menyimpan catatan, Member hanya membaca.
+    private void showDetail(Task task) {
+        Label title = new Label(task.getTitle());
+        title.getStyleClass().add("h2");
+        title.setWrapText(true);
+
+        GridPane info = new GridPane();
+        info.setHgap(16);
+        info.setVgap(6);
+        info.addRow(0, mutedLabel("Status"), StyleHelper.statusText(task.getStatus()));
+        info.addRow(1, mutedLabel("Prioritas"), StyleHelper.priority(task));
+        info.addRow(2, mutedLabel("Tenggat"), new Label(StyleHelper.formatDate(task.getDueAt())));
+        info.addRow(3, mutedLabel("Penerima"), new Label(String.join(", ", assigneeNames(task))));
+
+        VBox content = new VBox(8, title);
+        if (task.getDescription() != null && !task.getDescription().isBlank()) {
+            Label description = new Label(task.getDescription());
+            description.setWrapText(true);
+            content.getChildren().add(description);
+        }
+
+        Label notesLabel = new Label("Catatan tugas dan hasil");
+        notesLabel.getStyleClass().add("section-label");
+        TextArea notes = new TextArea(task.getNotes());
+        notes.setWrapText(true);
+        notes.setPrefRowCount(5);
+        notes.setPromptText("Belum ada catatan");
+        notes.setEditable(isCoordinator());
+        content.getChildren().addAll(info, notesLabel, notes);
+        content.setPrefWidth(460);
+
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Detail tugas");
+        dialog.getDialogPane().setContent(content);
+        AlertUtil.applyStyle(dialog);
+        ButtonType close = new ButtonType("Tutup", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType save = new ButtonType("Simpan catatan", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(close);
+        if (isCoordinator()) {
+            dialog.getDialogPane().getButtonTypes().add(save);
+        }
+
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.isPresent() && result.get() == save) {
+            saveNotes(task, notes.getText());
+        }
+    }
+
+    private Label mutedLabel(String text) {
+        Label label = new Label(text);
+        label.getStyleClass().add("muted");
+        return label;
+    }
+
+    private void saveNotes(Task task, String notes) {
+        try {
+            taskService.saveNotes(task.getId(), user.getId(), notes);
+            AlertUtil.showInfo("Catatan disimpan.");
+            main.refreshCurrentPage();
+        } catch (ValidationException | SQLException e) {
+            AlertUtil.showError(e);
+        }
     }
 
     private List<String> assigneeNames(Task task) {
