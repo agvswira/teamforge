@@ -61,6 +61,8 @@ public class App extends Application {
         // Dialog tanpa bingkai jendela; sudut membulat diatur oleh CSS kelas "dialog"
         stage.initStyle(StageStyle.TRANSPARENT);
         Scene dialogScene = new Scene(root);
+        // Jendela dialog tidak mewarisi CSS jendela utama, jadi stylesheet dipasang di sini
+        dialogScene.getStylesheets().add(STYLESHEET);
         dialogScene.setFill(Color.TRANSPARENT);
         stage.setScene(dialogScene);
 
