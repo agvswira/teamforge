@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import org.teamforge.dao.TaskDAO;
 import org.teamforge.exception.DependencyException;
 import org.teamforge.exception.ValidationException;
+import org.teamforge.model.ProjectMembership;
 import org.teamforge.model.Task;
 import org.teamforge.model.TaskAssignment;
 import org.teamforge.model.TaskDependency;
@@ -242,7 +243,7 @@ public class TaskService {
 
     public void startTask(int taskId, int actorId) throws SQLException, ValidationException {
         Task task = getTask(taskId);
-        checkAssignee(task, actorId);
+        checkWorker(task, actorId);
         List<Task> blockers = task.getPrerequisites().stream()
                 .filter(p -> p.getStatus() != TaskStatus.DONE)
                 .collect(Collectors.toList());
@@ -256,7 +257,7 @@ public class TaskService {
 
     public void completeTask(int taskId, int actorId) throws SQLException, ValidationException {
         Task task = getTask(taskId);
-        checkAssignee(task, actorId);
+        checkWorker(task, actorId);
         task.complete();
         taskDAO.updateStatus(task);
     }
@@ -285,6 +286,14 @@ public class TaskService {
     private void checkAssignee(Task task, int userId) throws SQLException, ValidationException {
         projectService.requireMembership(task.getProjectId(), userId);
         if (!task.isAssignedTo(userId)) {
+            throw new ValidationException("Tugas ini tidak ditugaskan kepada Anda.");
+        }
+    }
+
+    // Status tugas boleh diubah oleh penerima tugas, atau oleh Coordinator untuk tugas siapa pun
+    private void checkWorker(Task task, int userId) throws SQLException, ValidationException {
+        ProjectMembership membership = projectService.requireMembership(task.getProjectId(), userId);
+        if (!membership.canManageProject() && !task.isAssignedTo(userId)) {
             throw new ValidationException("Tugas ini tidak ditugaskan kepada Anda.");
         }
     }
