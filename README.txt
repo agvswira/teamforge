@@ -29,7 +29,7 @@ PBO Kelas B - Kelompok 3, Informatika Universitas Udayana
    Dari folder proyek ini:
          mvn clean javafx:run
 
-   Semua akun contoh memakai password yang tertulis di komentar database/seed.sql.
+   Semua akun contoh (seed.sql dan demo.sql) memakai password: password123
    Data seed.sql:
          example@gmail.com  -> Coordinator pada "TeamForge Uji", Member pada "Project Uji B"
          contoh@gmail.com   -> Member pada "TeamForge Uji", Coordinator pada "Project Uji B"
